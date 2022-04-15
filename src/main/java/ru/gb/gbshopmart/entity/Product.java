@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -55,6 +56,14 @@ public class Product {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
+
+    @ManyToMany
+    @JoinTable(
+            name = "PRODUCT_CATEGORY",
+            joinColumns = @JoinColumn(name = "PRODUCT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CATEGORY_ID")
+    )
+    private List<Category> category;
 
     @Override
     public String toString() {
